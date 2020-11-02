@@ -12,8 +12,6 @@ public class Main {
 	public static void main(String[] args) {
 		GlavniProzor.getProzor().setVisible(false);
 		
-		boolean alahu = true;
-		
 		boolean novoSkladiste = true;
 		boolean isAuto = true;
 		
