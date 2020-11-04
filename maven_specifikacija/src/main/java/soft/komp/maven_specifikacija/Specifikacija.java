@@ -19,8 +19,9 @@ public abstract class Specifikacija {
 	private File file;
 	private ArrayList<Entitet> podaci;
 	private boolean isAuto = true;
-	private int maxPoFajlu = 10;
+	private int maxPoFajlu = 3;
 	private int autoinkrement = 0;
+	private int brojEntiteta = 0;
 	
 	public Specifikacija() {
 		podaci = new ArrayList<Entitet>();
@@ -39,22 +40,23 @@ public abstract class Specifikacija {
             if(novoSkladiste) {
             	postaviConfig(file, isAuto);
             	this.isAuto = isAuto;
+        		namestiBazu(novoSkladiste);
             } else {
             	procitajConfig(file);
+        		namestiBazu(novoSkladiste);
+        		ucitaj();
             }
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		namestiBazu(novoSkladiste);
-		ucitaj();
 		
 	}
 
 	private void procitajConfig(File file) throws IOException {
 		BufferedReader buffReader = new BufferedReader(new FileReader(file));
 		List<String> parametri = new ArrayList<String>();
-		for(int i = 0; i < 3; i++) {
+		for(int i = 0; i < 4; i++) {
 			String line = buffReader.readLine();
 			System.out.println(line);
 			parametri.add(line);
@@ -64,6 +66,7 @@ public abstract class Specifikacija {
 			if(par[0].equals("maxPoFajlu")) this.maxPoFajlu = Integer.parseInt(par[1]);
 			if(par[0].equals("isAuto")) this.isAuto = par[1].equals("true") ? true : false;
 			if(par[0].equals("autoinkrement")) this.autoinkrement = Integer.parseInt(par[1]);
+			if(par[0].equals("brojEntiteta")) this.brojEntiteta = Integer.parseInt(par[1]);
 		}
 		buffReader.close();
 	}
@@ -71,9 +74,10 @@ public abstract class Specifikacija {
 	private void postaviConfig(File file, boolean isAuto) {
 		try {
 			BufferedWriter buffWriter = new BufferedWriter(new FileWriter(file));
-			buffWriter.write("maxPoFajlu:10\n");
+			buffWriter.write("maxPoFajlu:3\n");
 			buffWriter.write("isAuto:" + isAuto + "\n");
-			buffWriter.write("autoinkrement:0");
+			buffWriter.write("autoinkrement:0" + "\n");
+			buffWriter.write("brojEntiteta:0");
 			buffWriter.close();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -264,6 +268,25 @@ public abstract class Specifikacija {
 		this.maxPoFajlu = maxPoFajlu;
 	}
 
+	public int getBrojEntiteta() {
+		return brojEntiteta;
+	}
+
+	public void setBrojEntiteta(int brojEntiteta) {
+		this.brojEntiteta = brojEntiteta;
+		File file = new File(this.getFolder().getAbsolutePath() + "/config.txt");
+        try {
+			BufferedWriter buffWriter = new BufferedWriter(new FileWriter(file));
+			buffWriter.write("maxPoFajlu:" + this.getMaxPoFajlu() + "\n");
+			buffWriter.write("isAuto:" + this.isAuto() + "\n");
+			buffWriter.write("autoinkrement:" + autoinkrement + "\n");
+			buffWriter.write("brojEntiteta:" + brojEntiteta);
+			buffWriter.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	public int getAutoinkrement() {
 		int temp = autoinkrement;
 		autoinkrement++;
@@ -272,7 +295,8 @@ public abstract class Specifikacija {
 			BufferedWriter buffWriter = new BufferedWriter(new FileWriter(file));
 			buffWriter.write("maxPoFajlu:" + this.getMaxPoFajlu() + "\n");
 			buffWriter.write("isAuto:" + this.isAuto() + "\n");
-			buffWriter.write("autoinkrement:" + autoinkrement);
+			buffWriter.write("autoinkrement:" + autoinkrement + "\n");
+			buffWriter.write("brojEntiteta:" + brojEntiteta);
 			buffWriter.close();
 		} catch (Exception e) {
 			e.printStackTrace();

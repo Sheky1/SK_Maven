@@ -6,9 +6,14 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import com.fasterxml.jackson.dataformat.yaml.YAMLGenerator.Feature;
+
+import soft.komp.maven_specifikacija.Entitet;
 import soft.komp.maven_specifikacija.Specifikacija;
 
 public class ImplementacijaXML extends Specifikacija {
@@ -17,7 +22,7 @@ public class ImplementacijaXML extends Specifikacija {
 	public void namestiBazu(boolean novoSkladiste) {
 		if(novoSkladiste) {
 			try {
-			     File file = new File(this.getFolder().getAbsolutePath() + "/skladiste.xml");
+			     File file = new File(this.getFolder().getAbsolutePath() + "/skladiste.yaml");
 		         file.createNewFile();
 		         this.setFile(file);
 		    } catch (IOException e) {
@@ -26,7 +31,7 @@ public class ImplementacijaXML extends Specifikacija {
 		}
 		else {
 			try {
-			     File file = new File(this.getFolder().getAbsolutePath() + "/skladiste.xml");
+			     File file = new File(this.getFolder().getAbsolutePath() + "/skladiste.yaml");
 		         file.createNewFile();
 		         this.setFile(file);
 		    } catch (IOException e) {
@@ -37,34 +42,53 @@ public class ImplementacijaXML extends Specifikacija {
 
 	@Override
 	public void ucitaj() {
-//	    try {
+	    try {
+	    	ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
+	    	mapper.findAndRegisterModules();
+	    	Entitet entitet = mapper.readValue(this.getFile(), Entitet.class);
+	    	System.out.println(entitet);
+
 //	        BufferedReader buffReader = new BufferedReader(new FileReader(this.getFile()));
-//	        String line;
-//	        Gson gson = new Gson();
-//	        Type type = new TypeToken<List<Entitet>>() {}.getType();
-//	        while ((line = buffReader.readLine()) != null) {
-//	        	this.getPodaci().addAll(gson.fromJson(line, type));
+	        
+//	        Iterable<CSVRecord> records = CSVFormat.DEFAULT.withHeader("ID", "Naziv", "Podaci").parse(buffReader);
+//	        for (CSVRecord record : records) {
+//	            System.out.println("ID: " + record.get("ID"));
+//	            System.out.println("Naziv: " + record.get("Naziv"));
+//	            System.out.println("Podaci: " + record.get("Podaci"));
 //	        }
+	        
 //	        buffReader.close();
-//	    } catch (IOException e) {
-//	        e.printStackTrace();
-//	    }
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
 	}
 
 	@Override
 	public void upisi() {
-//		clearFile();
-//	    try {
+		clearFile();
+	    try {
+	    	ObjectMapper mapper = new ObjectMapper(new YAMLFactory().disable(Feature.WRITE_DOC_START_MARKER));
+	    	mapper.writeValue(this.getFile(), this.getPodaci());
+
+	    	
 //	        BufferedWriter buffWriter = new BufferedWriter(new FileWriter(this.getFile(), true));
-//	        Gson gson = new Gson();
-//	        Type type = new TypeToken<List<Entitet>>() {}.getType();
-//	        String json = gson.toJson(this.getPodaci(), type);
-//	        buffWriter.append(json);
-//	        buffWriter.newLine();
+	        
+//	        CSVPrinter printer = CSVFormat.DEFAULT.print(buffWriter);
+//
+//	        for (Entitet entitet: this.getPodaci()) {
+//				int id = entitet.getId();
+//				String naziv = entitet.getNaziv();
+//				String info = entitet.getProstiPodaci().toString();
+//				String infoUgnj = entitet.getUgnjezdeni().toString();
+//	            printer.printRecord(id, naziv, info + infoUgnj);
+//			}
+//
+//	        printer.flush();
+
 //	        buffWriter.close();
-//	    } catch (IOException e) {
-//	        e.printStackTrace();
-//	    }
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
 	}
 	
 }

@@ -26,5 +26,10 @@
 		<artifactId>maven_JSON</artifactId>
   		<version>0.0.1-SNAPSHOT</version>
 	</dependency>
+	<dependency>
+	    <groupId>soft.komp</groupId>
+	    <artifactId>maven_XML</artifactId>
+	    <version>0.0.1-SNAPSHOT</version>
+	</dependency>
   </dependencies>
 </project>

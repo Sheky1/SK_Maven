@@ -13,7 +13,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import model.TableModel;
-import soft.komp.maven_JSON.ImplementacijaJSON;
+import soft.komp.maven_XML.ImplementacijaXML;
 
 @SuppressWarnings("serial")
 public class GlavniProzor extends JFrame{
@@ -23,11 +23,11 @@ public class GlavniProzor extends JFrame{
 	private JTable tabela;
 	private TableModel tableModel;
 	private JScrollPane skrol;
-	private ImplementacijaJSON skladiste;
+	private ImplementacijaXML skladiste;
 	private String selektovaniID = "";
 	
 	private GlavniProzor() {
-		skladiste = new ImplementacijaJSON();
+		skladiste = new ImplementacijaXML();
 		postavi();
 	}
 
@@ -114,11 +114,11 @@ public class GlavniProzor extends JFrame{
 		this.skrol = skrol;
 	}
 
-	public ImplementacijaJSON getSkladiste() {
+	public ImplementacijaXML getSkladiste() {
 		return skladiste;
 	}
 
-	public void setSkladiste(ImplementacijaJSON skladiste) {
+	public void setSkladiste(ImplementacijaXML skladiste) {
 		this.skladiste = skladiste;
 	}
 
