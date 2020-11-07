@@ -19,28 +19,6 @@ import soft.komp.maven_specifikacija.Specifikacija;
 
 public class ImplementacijaJSON extends Specifikacija {
 
-	@Override
-	public void namestiBazu(boolean novoSkladiste) {
-		if(novoSkladiste) {
-			try {
-			     File file = new File(this.getFolder().getAbsolutePath() + "/skladiste0.json");
-		         file.createNewFile();
-		         this.setFile(file);
-		    } catch (IOException e) {
-		        e.printStackTrace();
-		    }
-		}
-		else {
-			try {
-			     File file = new File(this.getFolder().getAbsolutePath() + "/skladiste0.json");
-		         file.createNewFile();
-		         this.setFile(file);
-		    } catch (IOException e) {
-		        e.printStackTrace();
-		    }
-		}
-	}
-
 	@SuppressWarnings("unchecked")
 	@Override
 	public void ucitaj() {
@@ -70,7 +48,6 @@ public class ImplementacijaJSON extends Specifikacija {
 		int maxPoFajlu = this.getMaxPoFajlu();
 		this.setBrojEntiteta(this.getPodaci().size());
 		int n = this.getBrojEntiteta()/maxPoFajlu + 1;
-		System.out.println("n: " + n + "broj:" + this.getBrojEntiteta() + "max: " + maxPoFajlu);
 		for(int i = 0; i < n; i++) {
 			List<Entitet> zaUpis = new ArrayList<Entitet>();
 			for(int j = i * maxPoFajlu; j < i * maxPoFajlu + maxPoFajlu; j++) {

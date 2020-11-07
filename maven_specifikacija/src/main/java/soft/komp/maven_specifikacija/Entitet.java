@@ -12,6 +12,9 @@ public class Entitet implements Comparable<Entitet> {
 	private boolean sortById = true;
 	private boolean asc = true;
 	
+	public Entitet() {
+	}
+	
 	public Entitet(int id, String naziv, Map<String, String> prostiPodaci) {
 		this.id = id;
 		this.naziv = naziv;
@@ -108,12 +111,12 @@ public class Entitet implements Comparable<Entitet> {
 
 	@Override
 	public String toString() {
-		if(ugnjezdeni.size() == 0) {
-			return "id: " + id + ", naziv: " + naziv + ", prostiPodaci: " + prostiPodaci + ", ugnjezdeni: "
+		if(ugnjezdeni.size() != 0) {
+			return "id:" + id + ", naziv:" + naziv + ", prostiPodaci:" + prostiPodaci + ", ugnjezdeni:"
 					+ ugnjezdeni;
 		}
 		else {
-			return "id: " + id + ", naziv: " + naziv + ", prostiPodaci: " + prostiPodaci;
+			return "id:" + id + ", naziv:" + naziv + ", prostiPodaci:" + prostiPodaci;
 		}
 		
 	} 

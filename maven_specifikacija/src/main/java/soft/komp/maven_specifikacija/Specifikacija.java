@@ -27,7 +27,6 @@ public abstract class Specifikacija {
 		podaci = new ArrayList<Entitet>();
 	}
 
-	public abstract void namestiBazu(boolean novoSkladiste);
 	public abstract void upisi();
 	public abstract void ucitaj();
 	
@@ -40,10 +39,8 @@ public abstract class Specifikacija {
             if(novoSkladiste) {
             	postaviConfig(file, isAuto);
             	this.isAuto = isAuto;
-        		namestiBazu(novoSkladiste);
             } else {
             	procitajConfig(file);
-        		namestiBazu(novoSkladiste);
         		ucitaj();
             }
 		} catch (Exception e) {
@@ -58,7 +55,6 @@ public abstract class Specifikacija {
 		List<String> parametri = new ArrayList<String>();
 		for(int i = 0; i < 4; i++) {
 			String line = buffReader.readLine();
-			System.out.println(line);
 			parametri.add(line);
 		}
 		for (String string : parametri) {
@@ -198,7 +194,6 @@ public abstract class Specifikacija {
 				}
 			}
 		}
-		System.out.println(zaPretragu);
 		return zaPretragu;
 	}
 	public List<Entitet> pretrazi(String idString) {
@@ -211,7 +206,6 @@ public abstract class Specifikacija {
 			}
 			
 		}
-		System.out.println(zaPretragu);
 		return zaPretragu;
 	}
 	
@@ -234,7 +228,6 @@ public abstract class Specifikacija {
 			String vrednost = red[1];
 			polja.put(kljuc, vrednost);
 		}
-		System.out.println(polja);
 		return polja;
 	}
 	

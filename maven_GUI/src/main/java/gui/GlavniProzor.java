@@ -13,7 +13,8 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import model.TableModel;
-import soft.komp.maven_XML.ImplementacijaXML;
+//import soft.komp.maven_XML.ImplementacijaXML;
+import soft.komp.maven_custom.ImplementacijaCustom;
 
 @SuppressWarnings("serial")
 public class GlavniProzor extends JFrame{
@@ -23,11 +24,11 @@ public class GlavniProzor extends JFrame{
 	private JTable tabela;
 	private TableModel tableModel;
 	private JScrollPane skrol;
-	private ImplementacijaXML skladiste;
+	private ImplementacijaCustom skladiste;
 	private String selektovaniID = "";
 	
 	private GlavniProzor() {
-		skladiste = new ImplementacijaXML();
+		skladiste = new ImplementacijaCustom();
 		postavi();
 	}
 
@@ -114,11 +115,11 @@ public class GlavniProzor extends JFrame{
 		this.skrol = skrol;
 	}
 
-	public ImplementacijaXML getSkladiste() {
+	public ImplementacijaCustom getSkladiste() {
 		return skladiste;
 	}
 
-	public void setSkladiste(ImplementacijaXML skladiste) {
+	public void setSkladiste(ImplementacijaCustom skladiste) {
 		this.skladiste = skladiste;
 	}
 
