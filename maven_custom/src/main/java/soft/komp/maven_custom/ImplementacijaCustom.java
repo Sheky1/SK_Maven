@@ -23,13 +23,13 @@ public class ImplementacijaCustom extends Specifikacija {
 	
 	@Override
 	public void ucitaj() {
-		int maxPoFajlu = this.getMaxPoFajlu();
-		int brojFajlova = this.getBrojEntiteta()/maxPoFajlu + 1;
+		int maxPoFajlu = super.getMaxPoFajlu();
+		int brojFajlova = super.getBrojEntiteta()/maxPoFajlu + 1;
 		for(int i = 0; i < brojFajlova; i++) {
-			File file = new File(this.getFolder().getAbsolutePath() + "/skladiste" + i + ".skc");
+			File file = new File(super.getFolder().getAbsolutePath() + "/skladiste" + i + ".skc");
 		    try {
 				file.createNewFile();
-				this.setFile(file);
+				super.setFile(file);
 				parsirajCitanje();
 		    } catch (IOException e) {
 		        e.printStackTrace();
@@ -39,18 +39,18 @@ public class ImplementacijaCustom extends Specifikacija {
 
 	@Override
 	public void upisi() {
-		int maxPoFajlu = this.getMaxPoFajlu();
-		this.setBrojEntiteta(this.getPodaci().size());
-		int brojFajlova = this.getBrojEntiteta()/maxPoFajlu + 1;
+		int maxPoFajlu = super.getMaxPoFajlu();
+		super.setBrojEntiteta(super.getPodaci().size());
+		int brojFajlova = super.getBrojEntiteta()/maxPoFajlu + 1;
 		for(int i = 0; i < brojFajlova; i++) {
 			List<Entitet> zaUpis = new ArrayList<Entitet>();
 			for(int j = i * maxPoFajlu; j < i * maxPoFajlu + maxPoFajlu; j++) {
-				if(this.getPodaci().size() > j) zaUpis.add(this.getPodaci().get(j));
+				if(super.getPodaci().size() > j) zaUpis.add(super.getPodaci().get(j));
 			}
-			File file = new File(this.getFolder().getAbsolutePath() + "/skladiste" + i + ".skc");
+			File file = new File(super.getFolder().getAbsolutePath() + "/skladiste" + i + ".skc");
 		    try {
 				file.createNewFile();
-				this.setFile(file);
+				super.setFile(file);
 				clearFile();
 		        parsirajPisanje(zaUpis);
 		    } catch (IOException e) {
@@ -68,7 +68,7 @@ public class ImplementacijaCustom extends Specifikacija {
 			upis += "\t<=\n";
 		}
 		upis+=")\n";
-		BufferedWriter buffWriter = new BufferedWriter(new FileWriter(this.getFile(), true));
+		BufferedWriter buffWriter = new BufferedWriter(new FileWriter(super.getFile(), true));
         buffWriter.append(upis);
         buffWriter.close();
 	}
@@ -98,7 +98,7 @@ public class ImplementacijaCustom extends Specifikacija {
 	public void parsirajCitanje() throws IOException {
 		List<Entitet> listaEntiteta = new ArrayList<Entitet>();
 		
-		BufferedReader buffReader = new BufferedReader(new FileReader(this.getFile()));
+		BufferedReader buffReader = new BufferedReader(new FileReader(super.getFile()));
         
 		String line;
 		while ((line = buffReader.readLine()) != null) {
@@ -150,7 +150,7 @@ public class ImplementacijaCustom extends Specifikacija {
         	}
         }
         buffReader.close();
-		this.getPodaci().addAll(listaEntiteta);
+        super.getPodaci().addAll(listaEntiteta);
 	}
 	
 }

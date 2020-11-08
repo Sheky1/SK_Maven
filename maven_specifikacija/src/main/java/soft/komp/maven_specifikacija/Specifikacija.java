@@ -219,7 +219,7 @@ public abstract class Specifikacija {
 		Collections.sort(entiteti);
 	}
 	
-	public HashMap<String, String> parsirajTextarea(String tekst) {
+	private Map<String, String> parsirajTextarea(String tekst) {
 		HashMap<String, String> polja = new HashMap<String, String>();
 		String[] redovi = tekst.split("\n");
 		for(int i = 0; i < redovi.length; i++) {

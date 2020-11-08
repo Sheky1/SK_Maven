@@ -27,19 +27,19 @@ public class ImplementacijaJSON extends Specifikacija {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void ucitaj() {
-		int maxPoFajlu = this.getMaxPoFajlu();
-		int n = this.getBrojEntiteta()/maxPoFajlu + 1;
+		int maxPoFajlu = super.getMaxPoFajlu();
+		int n = super.getBrojEntiteta()/maxPoFajlu + 1;
 		for(int i = 0; i < n; i++) {
-			File file = new File(this.getFolder().getAbsolutePath() + "/skladiste" + i + ".json");
+			File file = new File(super.getFolder().getAbsolutePath() + "/skladiste" + i + ".json");
 		    try {
 				file.createNewFile();
-				this.setFile(file);
-		        BufferedReader buffReader = new BufferedReader(new FileReader(this.getFile()));
+				super.setFile(file);
+		        BufferedReader buffReader = new BufferedReader(new FileReader(super.getFile()));
 		        String line;
 		        Gson gson = new Gson();
 		        Type type = new TypeToken<List<Entitet>>() {}.getType();
 		        while ((line = buffReader.readLine()) != null) {
-		        	this.getPodaci().addAll((Collection<? extends Entitet>) gson.fromJson(line, type));
+		        	super.getPodaci().addAll((Collection<? extends Entitet>) gson.fromJson(line, type));
 		        }
 		        buffReader.close();
 		    } catch (IOException e) {
@@ -50,20 +50,20 @@ public class ImplementacijaJSON extends Specifikacija {
 
 	@Override
 	public void upisi() {
-		int maxPoFajlu = this.getMaxPoFajlu();
-		this.setBrojEntiteta(this.getPodaci().size());
-		int n = this.getBrojEntiteta()/maxPoFajlu + 1;
+		int maxPoFajlu = super.getMaxPoFajlu();
+		this.setBrojEntiteta(super.getPodaci().size());
+		int n = super.getBrojEntiteta()/maxPoFajlu + 1;
 		for(int i = 0; i < n; i++) {
 			List<Entitet> zaUpis = new ArrayList<Entitet>();
 			for(int j = i * maxPoFajlu; j < i * maxPoFajlu + maxPoFajlu; j++) {
-				if(this.getPodaci().size() > j) zaUpis.add(this.getPodaci().get(j));
+				if(super.getPodaci().size() > j) zaUpis.add(super.getPodaci().get(j));
 			}
-			File file = new File(this.getFolder().getAbsolutePath() + "/skladiste" + i + ".json");
+			File file = new File(super.getFolder().getAbsolutePath() + "/skladiste" + i + ".json");
 		    try {
 				file.createNewFile();
-				this.setFile(file);
+				super.setFile(file);
 				clearFile();
-		        BufferedWriter buffWriter = new BufferedWriter(new FileWriter(this.getFile(), true));
+		        BufferedWriter buffWriter = new BufferedWriter(new FileWriter(super.getFile(), true));
 		        Gson gson = new Gson();
 		        Type type = new TypeToken<List<Entitet>>() {}.getType();
 		        String json = gson.toJson(zaUpis, type);

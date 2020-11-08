@@ -29,7 +29,7 @@ public class GlavniProzor extends JFrame{
 	
 	private GlavniProzor() {
 		try {
-			Class.forName("soft.komp.maven_JSON.ImplementacijaJSON");
+			Class.forName("soft.komp.maven_XML.ImplementacijaXML");
 			skladiste = ExportManager.getExporter();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();

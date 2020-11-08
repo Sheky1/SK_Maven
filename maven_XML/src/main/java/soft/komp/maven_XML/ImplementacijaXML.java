@@ -26,14 +26,14 @@ public class ImplementacijaXML extends Specifikacija {
 	    	ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
 	    	mapper.findAndRegisterModules();
 	    	CollectionType listType = mapper.getTypeFactory().constructCollectionType(ArrayList.class, Entitet.class);
-			int maxPoFajlu = this.getMaxPoFajlu();
-			int n = this.getBrojEntiteta()/maxPoFajlu + 1;
+			int maxPoFajlu = super.getMaxPoFajlu();
+			int n = super.getBrojEntiteta()/maxPoFajlu + 1;
 			for(int i = 0; i < n; i++) {
-				File file = new File(this.getFolder().getAbsolutePath() + "/skladiste" + i + ".yaml");
+				File file = new File(super.getFolder().getAbsolutePath() + "/skladiste" + i + ".yaml");
 				file.createNewFile();
-				this.setFile(file);
-		        List<Entitet> lista = mapper.readValue(this.getFile(), listType);
-		    	this.getPodaci().addAll(lista);
+				super.setFile(file);
+		        List<Entitet> lista = mapper.readValue(super.getFile(), listType);
+		        super.getPodaci().addAll(lista);
 			}
 	    } catch (IOException e) {
 	        e.printStackTrace();
@@ -44,19 +44,19 @@ public class ImplementacijaXML extends Specifikacija {
 	public void upisi() {
     	ObjectMapper mapper = new ObjectMapper(new YAMLFactory().disable(Feature.WRITE_DOC_START_MARKER));
 	    try {
-			int maxPoFajlu = this.getMaxPoFajlu();
-			this.setBrojEntiteta(this.getPodaci().size());
-			int n = this.getBrojEntiteta()/maxPoFajlu + 1;
+			int maxPoFajlu = super.getMaxPoFajlu();
+			super.setBrojEntiteta(super.getPodaci().size());
+			int n = super.getBrojEntiteta()/maxPoFajlu + 1;
 			for(int i = 0; i < n; i++) {
 				List<Entitet> zaUpis = new ArrayList<Entitet>();
 				for(int j = i * maxPoFajlu; j < i * maxPoFajlu + maxPoFajlu; j++) {
-					if(this.getPodaci().size() > j) zaUpis.add(this.getPodaci().get(j));
+					if(super.getPodaci().size() > j) zaUpis.add(super.getPodaci().get(j));
 				}
-				File file = new File(this.getFolder().getAbsolutePath() + "/skladiste" + i + ".yaml");
+				File file = new File(super.getFolder().getAbsolutePath() + "/skladiste" + i + ".yaml");
 				file.createNewFile();
-				this.setFile(file);
+				super.setFile(file);
 				clearFile();
-		    	mapper.writeValue(this.getFile(), zaUpis);
+		    	mapper.writeValue(super.getFile(), zaUpis);
 			}
 	    } catch (IOException e) {
 	        e.printStackTrace();
