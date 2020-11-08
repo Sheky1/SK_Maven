@@ -12,10 +12,15 @@ import java.util.List;
 import java.util.Map;
 
 import soft.komp.maven_specifikacija.Entitet;
+import soft.komp.maven_specifikacija.ExportManager;
 import soft.komp.maven_specifikacija.Specifikacija;
 
 public class ImplementacijaCustom extends Specifikacija {
 
+	static {
+		ExportManager.registerExporter(new ImplementacijaCustom());
+	}
+	
 	@Override
 	public void ucitaj() {
 		int maxPoFajlu = this.getMaxPoFajlu();
@@ -72,7 +77,7 @@ public class ImplementacijaCustom extends Specifikacija {
 		String tabovi = brojTabova == 2 ? "\t\t" : "\t\t\t\t";
 		String upis = "";
 		upis += tabovi + "id->" + entitet.getId() + "\n";
-		upis += tabovi + "naziv->\"" + entitet.getNaziv() + "\"\n";
+		upis += tabovi + "naziv->" + entitet.getNaziv() + "\n";
 		upis += tabovi + "prostiPodaci->" + entitet.getProstiPodaci().toString() + "\n";
 		return upis;
 	}
@@ -98,7 +103,6 @@ public class ImplementacijaCustom extends Specifikacija {
 		String line;
 		while ((line = buffReader.readLine()) != null) {
         	if(line.equals("\t=>")) {
-    			Entitet entitet = null;
         		int id = 0; 
         		String naziv = ""; 
         		Map<String, String> prostiPodaci = new HashMap<String, String>();

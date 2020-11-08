@@ -13,8 +13,8 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import model.TableModel;
-//import soft.komp.maven_XML.ImplementacijaXML;
-import soft.komp.maven_custom.ImplementacijaCustom;
+import soft.komp.maven_specifikacija.ExportManager;
+import soft.komp.maven_specifikacija.Specifikacija;
 
 @SuppressWarnings("serial")
 public class GlavniProzor extends JFrame{
@@ -24,11 +24,16 @@ public class GlavniProzor extends JFrame{
 	private JTable tabela;
 	private TableModel tableModel;
 	private JScrollPane skrol;
-	private ImplementacijaCustom skladiste;
+	private Specifikacija skladiste;
 	private String selektovaniID = "";
 	
 	private GlavniProzor() {
-		skladiste = new ImplementacijaCustom();
+		try {
+			Class.forName("soft.komp.maven_JSON.ImplementacijaJSON");
+			skladiste = ExportManager.getExporter();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 		postavi();
 	}
 
@@ -46,7 +51,6 @@ public class GlavniProzor extends JFrame{
 		int visina = dimenzija.height;
 		int sirina = dimenzija.width;
 		setSize(sirina/3*2, visina/3*2);
-//		setSize(new Dimension(540, 550));
 		
 		setTitle("Softverske komponente");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
@@ -115,11 +119,11 @@ public class GlavniProzor extends JFrame{
 		this.skrol = skrol;
 	}
 
-	public ImplementacijaCustom getSkladiste() {
+	public Specifikacija getSkladiste() {
 		return skladiste;
 	}
 
-	public void setSkladiste(ImplementacijaCustom skladiste) {
+	public void setSkladiste(Specifikacija skladiste) {
 		this.skladiste = skladiste;
 	}
 

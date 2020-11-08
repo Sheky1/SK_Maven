@@ -11,10 +11,15 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import com.fasterxml.jackson.dataformat.yaml.YAMLGenerator.Feature;
 
 import soft.komp.maven_specifikacija.Entitet;
+import soft.komp.maven_specifikacija.ExportManager;
 import soft.komp.maven_specifikacija.Specifikacija;
 
 public class ImplementacijaXML extends Specifikacija {
 
+	static {
+		ExportManager.registerExporter(new ImplementacijaXML());
+	}
+	
 	@Override
 	public void ucitaj() {
 	    try {

@@ -15,10 +15,15 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import soft.komp.maven_specifikacija.Entitet;
+import soft.komp.maven_specifikacija.ExportManager;
 import soft.komp.maven_specifikacija.Specifikacija;
 
 public class ImplementacijaJSON extends Specifikacija {
 
+	static {
+		ExportManager.registerExporter(new ImplementacijaJSON());
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public void ucitaj() {
