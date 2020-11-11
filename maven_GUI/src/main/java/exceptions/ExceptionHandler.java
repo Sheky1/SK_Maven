@@ -14,6 +14,7 @@ public class ExceptionHandler {
 		else if(text.equals("postojeciID")) return "ID koji ste uneli vec postoji.";
 		else if(text.equals("textArea")) return "Morate uneti barem jedan podatak o entitetu.";
 		else if(text.equals("nepravilanID")) return "ID mora biti broj.";
+		else if(text.equals("skladiste")) return "Nije izabrano validno skladiste.";
 		return "Greska";
 	}
 }

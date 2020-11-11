@@ -22,11 +22,12 @@ public class ImplementacijaCustom extends Specifikacija {
 	}
 	
 	@Override
-	public void ucitaj() {
+	public boolean ucitaj() {
 		int maxPoFajlu = super.getMaxPoFajlu();
 		int brojFajlova = super.getBrojEntiteta()/maxPoFajlu + 1;
 		for(int i = 0; i < brojFajlova; i++) {
 			File file = new File(super.getFolder().getAbsolutePath() + "/skladiste" + i + ".skc");
+			if(!file.exists()) return false;
 		    try {
 				file.createNewFile();
 				super.setFile(file);
@@ -35,6 +36,7 @@ public class ImplementacijaCustom extends Specifikacija {
 		        e.printStackTrace();
 		    }
 	    }
+		return true;
 	}
 
 	@Override

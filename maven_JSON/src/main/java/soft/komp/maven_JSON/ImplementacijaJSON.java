@@ -26,11 +26,12 @@ public class ImplementacijaJSON extends Specifikacija {
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public void ucitaj() {
+	public boolean ucitaj() {
 		int maxPoFajlu = super.getMaxPoFajlu();
 		int n = super.getBrojEntiteta()/maxPoFajlu + 1;
 		for(int i = 0; i < n; i++) {
 			File file = new File(super.getFolder().getAbsolutePath() + "/skladiste" + i + ".json");
+			if(!file.exists()) return false;
 		    try {
 				file.createNewFile();
 				super.setFile(file);
@@ -46,6 +47,7 @@ public class ImplementacijaJSON extends Specifikacija {
 		        e.printStackTrace();
 		    }
 	    }
+		return true;
 	}
 
 	@Override

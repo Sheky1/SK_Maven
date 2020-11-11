@@ -12,6 +12,7 @@ import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import exceptions.ExceptionHandler;
 import model.TableModel;
 import soft.komp.maven_specifikacija.ExportManager;
 import soft.komp.maven_specifikacija.Specifikacija;
@@ -83,7 +84,14 @@ public class GlavniProzor extends JFrame{
 	}
 	
 	public void postaviSkladiste(boolean novoSkladiste, File file, boolean isAuto) {
-		skladiste.postaviSkladiste(novoSkladiste, file, isAuto);
+		boolean moze = skladiste.postaviSkladiste(novoSkladiste, file, isAuto);
+		System.out.println(moze);
+		if(!moze) {
+			ExceptionHandler.handle("skladiste");
+			this.setVisible(false);
+			return;
+		}
+		this.setVisible(true);
 		this.getTableModel().update();
 	}
 

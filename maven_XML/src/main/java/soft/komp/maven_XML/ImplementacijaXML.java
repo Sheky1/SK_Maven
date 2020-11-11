@@ -21,7 +21,7 @@ public class ImplementacijaXML extends Specifikacija {
 	}
 	
 	@Override
-	public void ucitaj() {
+	public boolean ucitaj() {
 	    try {
 	    	ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
 	    	mapper.findAndRegisterModules();
@@ -30,6 +30,7 @@ public class ImplementacijaXML extends Specifikacija {
 			int n = super.getBrojEntiteta()/maxPoFajlu + 1;
 			for(int i = 0; i < n; i++) {
 				File file = new File(super.getFolder().getAbsolutePath() + "/skladiste" + i + ".yaml");
+				if(!file.exists()) return false;
 				file.createNewFile();
 				super.setFile(file);
 		        List<Entitet> lista = mapper.readValue(super.getFile(), listType);
@@ -38,6 +39,7 @@ public class ImplementacijaXML extends Specifikacija {
 	    } catch (IOException e) {
 	        e.printStackTrace();
 	    }
+	    return true;
 	}
 
 	@Override

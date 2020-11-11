@@ -56,7 +56,6 @@ public class Main {
 		}
 		
 		if(folder != null) {
-			GlavniProzor.getProzor().setVisible(true);
 			GlavniProzor.getProzor().postaviSkladiste(novoSkladiste, folder, isAuto);
 		} else {
 			JOptionPane.showMessageDialog(null, "Neoophodno je uneti folder skladista", "Skladiste", JOptionPane.ERROR_MESSAGE);

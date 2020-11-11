@@ -62,7 +62,7 @@ public abstract class Specifikacija {
 	/**
 	 * ucitaj() je metoda koju implementacije pozivaju za citanje iz fajla
 	 */
-	public abstract void ucitaj();
+	public abstract boolean ucitaj();
 	
 	/**
 	 * postaviSkladiste(boolean, File, boolean) je metoda koja postavlja skladiste prema prosledjenim parametrima
@@ -72,10 +72,11 @@ public abstract class Specifikacija {
 	 * @param isAuto - boolean vrednost da li se id dodeljuje manuelno (false) ili je autoinkrement (true),
 	 * prosledjena od korisnika
 	 */
-	public void postaviSkladiste(boolean novoSkladiste, File folder, boolean isAuto) {
+	public boolean postaviSkladiste(boolean novoSkladiste, File folder, boolean isAuto) {
 		setFolder(folder);
 		
 		File file = new File(this.getFolder().getAbsolutePath() + "/config.txt");
+		boolean moze = true;
         try {
             file.createNewFile();
             if(novoSkladiste) {
@@ -83,11 +84,12 @@ public abstract class Specifikacija {
             	this.isAuto = isAuto;
             } else {
             	procitajConfig(file);
-        		ucitaj();
+        		moze = ucitaj();
             }
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return moze;
 		
 		
 	}
