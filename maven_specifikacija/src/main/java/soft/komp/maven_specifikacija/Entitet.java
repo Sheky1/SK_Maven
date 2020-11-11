@@ -3,18 +3,49 @@ package soft.komp.maven_specifikacija;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Klasa koja predstavlja model za specifikaciju
+ */
 public class Entitet implements Comparable<Entitet> {
 
+	/**
+	 * Id Entiteta
+	 */
 	private int id;
+	/**
+	 * Naziv Entiteta
+	 */
 	private String naziv;
+	/**
+	 * Podaci o Entitetu
+	 */
 	private Map<String, String> prostiPodaci;
+	/**
+	 * Ugnjezdeni Entiteti Entiteta
+	 */
 	private Map<Integer, Entitet> ugnjezdeni;
+	/**
+	 * Sortiranje Entiteta po id-ju (true) ili po nazivu (false)
+	 */
 	private boolean sortById = true;
+	/**
+	 * Sortiranje Entiteta rastuce (true) ili opadajuce (false)
+	 */
 	private boolean asc = true;
 	
+	
+	/**
+	 * Prazan konstruktor koji se koristi prilikom citanja iz yaml fajla
+	 */
 	public Entitet() {
 	}
 	
+	/**
+	 * Konstruktor koji se koristi prilikom kreiranja Entiteta
+	 * @param id - id Entiteta
+	 * @param naziv - naziv Entiteta
+	 * @param prostiPodaci - podaci o Entitetu
+	 */
 	public Entitet(int id, String naziv, Map<String, String> prostiPodaci) {
 		this.id = id;
 		this.naziv = naziv;
@@ -70,6 +101,12 @@ public class Entitet implements Comparable<Entitet> {
 		this.asc = asc;
 	}
 
+	/**
+	 * metoda koja poredi 2 Stringa
+	 * @param str1 - prvi String
+	 * @param str2 - drugi string
+	 * @return - metoda vraca 1 ako je prvi veci, 0, ako su isti ili -1 ako je drugi veci
+	 */
 	public int stringCompare(String str1, String str2){ 
         int l1 = str1.length(); 
         int l2 = str2.length(); 
@@ -90,6 +127,9 @@ public class Entitet implements Comparable<Entitet> {
         } 
     }
 
+	/**
+	 * metoda koja poredi dva Entiteta
+	 */
 	public int compareTo(Entitet drugi) {
 		if(asc) {
 			if(sortById) {

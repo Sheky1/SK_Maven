@@ -14,19 +14,44 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Specifikacija je klasa koja 
+ * Klasa koja upravlja Entitetima u skladistu
  *
  */
 public abstract class Specifikacija {
 
+	/**
+	 * folder koji predstavlja skladiste
+	 */
 	private File folder;
+	/**
+	 * fajl u koji trenutno upisujemo ili koji citamo
+	 */
 	private File file;
+	/**
+	 * lista svih Entiteta
+	 */
 	private ArrayList<Entitet> podaci;
+	/**
+	 * da li se id dodeljuje automatski ili rucno
+	 */
 	private boolean isAuto = true;
+	/**
+	 * max broj Entiteta po fajlu
+	 */
 	private int maxPoFajlu = 3;
+	/**
+	 * brojac za autoinkrement
+	 */
 	private int autoinkrement = 0;
+	/**
+	 * brojac za Entitete u skladistu
+	 */
 	private int brojEntiteta = 0;
 	
+	
+	/**
+	 * Inicijalizu se nova lista Entiteta
+	 */
 	public Specifikacija() {
 		podaci = new ArrayList<Entitet>();
 	}
@@ -172,6 +197,7 @@ public abstract class Specifikacija {
 	 * @param idString - id ugnjezdenog Entiteta prosledjen od korisnika
 	 * @param naziv - naziv ugnjezdenog Entiteta prosledjen od korisnika
 	 * @param textArea - podaci o ugnjezdenom Entitetu prosledjeni od korisnika
+	 * @return - metoda vraca boolean da li je ugnjezdeni Entitet uspesno dodat ili nije
 	 */
 	public boolean dodajUgnjezdeni(String spoljniId, String idString, String naziv, String textArea) { 
 		boolean uspeo = true;
@@ -293,7 +319,7 @@ public abstract class Specifikacija {
 	}
 	
 	/**
-	 * sortiraj(boolean, boolean, List<Entitet>) je metoda koja sortira Entitete iz prosledjene liste
+	 * sortiraj(boolean, boolean, List) je metoda koja sortira Entitete iz prosledjene liste
 	 * Entiteta prema prosledjenim parametrima (rastuce ili opadajuce i po id-ju ili po nazivu), na nacin
 	 * koji je definisan u compareTo metodi
 	 * @param asc - boolean vrednost da li se sortiranje vrsi rastuce (true) ili opadajuce (false)
